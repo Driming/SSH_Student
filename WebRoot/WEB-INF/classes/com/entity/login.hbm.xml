@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.entity.Login" table="t_login">
+		<id name="id" type="integer" column="id">
+			<generator class="identity"></generator>
+		</id>
+		<property name="account" type="string" column="account"></property>
+		<property name="loginIn" type="string" column="loginIn"></property>
+		<property name="loginOut" type="string" column="loginOut"></property>
+	</class>
+</hibernate-mapping>

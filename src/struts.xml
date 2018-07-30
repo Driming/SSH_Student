@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+	<constant name="struts.multipart.maxSize" value="500000" />
+
+	<package name="LoginIntercrptor" extends="json-default">
+		<interceptors>
+			<interceptor name="myInterceptor" class="com.intercept.LoginIntercept" />
+			
+			<interceptor-stack name="myInterStack">
+				<interceptor-ref name="myInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="myInterStack" />
+		<global-results>
+    		<result name="error" type="redirectAction">
+    			<param name="namespace">/log</param>
+    			<param name="actionName">hello</param>
+    		</result>
+    	</global-results>
+		
+	</package>
+
+
+	<!-- Huang Bei -->
+	<package name="Account" namespace="/acc" extends="LoginIntercrptor">
+		<action name="list" class="accountAction" method="findRecPages">
+			<result name="success">/AccountList.jsp</result>
+		</action>
+		<action name="addTeacAcc" class="accountAction" method="addTeacAcc">
+			<result name="success">/TeacAccountAdd.jsp</result>
+		</action>
+		<action name="addStuAcc" class="accountAction" method="addStuAcc">
+			<result name="success">/StuAccountAdd.jsp</result>
+		</action>
+		<action name="addTeacAccount" class="accountAction" method="addTeacAccount">
+			<result name="success" type="redirectAction">addTeacAcc</result>
+		</action>
+		<action name="addStuAccount" class="accountAction" method="addStuAccount">
+			<result name="success" type="redirectAction">addStuAcc</result>
+		</action>
+		<action name="showPersonal" class="accountAction" method="showPersonal">
+			<result name="success">/PersonalInfo.jsp</result>
+		</action>
+		<action name="checkPwd" class="accountAction" method="showInfo">
+			<result name="success" type="json">
+				<param name="root">msg</param>
+			</result>
+		</action>
+		
+		<action name="updatePwd" class="accountAction" method="updatePwd">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">main</param>
+			</result>
+		</action>
+		</package>
+	
+	<package name="college" namespace="/coll" extends="LoginIntercrptor">
+		<action name="list" class="collegeAction" method="findRecPages">
+			<result name="success">/CollegeList.jsp</result>
+		</action>
+		<action name="delete" class="collegeAction" method="deleteCollege">
+			<result name="success" type="redirectAction">list</result>
+		</action>
+		<action name="addCollege" class="collegeAction" method="addCollege">
+			<result name="success" type="redirectAction">list</result>
+		</action>
+		<action name="findByid" class="collegeAction" method="findCollegeById">
+			<result name="success">/CollegeUpdate.jsp</result>
+		</action>
+		<action name="updateCollege" class="collegeAction" method="updateCollege">
+			<result name="success" type="redirectAction">list</result>
+		</action>
+	</package>
+
+	<package name="Major" namespace="/m" extends="LoginIntercrptor">
+		<action name="list" class="majorAction" method="findRecPages">
+			<result name="success">/MajorList.jsp</result>
+		</action>
+		<action name="findByid" class="majorAction" method="findMajorById">
+			<result name="success">/MajorUpdate.jsp</result>
+		</action>
+		<action name="updateMajor" class="majorAction" method="updateMajor">
+			<result name="success" type="redirectAction">list</result>
+		</action>
+		<action name="addSelect" class="collegeAction" method="findAll">
+			<result name="success" type="json">
+				<param name="root">colleges</param>
+			</result>
+		</action>
+		<action name="addMajor" class="majorAction" method="addMajor">
+			<result name="success" type="redirectAction">list</result>
+		</action>
+		<action name="delete" class="majorAction" method="deleteMajor">
+			<result name="success" type="redirectAction">list</result>
+		</action>
+	</package>
+
+
+	<!-- Li Pan -->
+
+	<package name="teacher" namespace="/teac" extends="LoginIntercrptor">
+
+		<action name="teacherList" class="teacherAction" method="findPages">
+			<result name="success">
+				/Teacher.jsp
+       </result>
+		</action>
+
+		<action name="deleteTeacher" class="teacherAction" method="deleteTeacher">
+			<result name="success" type="redirectAction">
+				teacherList
+       </result>
+		</action>
+
+		<action name="modifyTeacher" class="teacherAction" method="modifyTeacher">
+			<result name="success">
+				/TeacherModify.jsp
+       </result>
+		</action>
+
+		<action name="updateTeacher" class="teacherAction" method="updateTeacher">
+			<result name="success" type="redirectAction">
+				teacherList
+       </result>
+		</action>
+
+
+		<action name="addTeacher" class="teacherAction" method="addTeacher">
+			<result name="success" type="redirectAction">
+				teacherList
+       </result>
+		</action>
+
+		<action name="gradeList" class="gradeAction" method="findPages">
+			<result name="success">
+				/Grade.jsp
+       </result>
+		</action>
+
+		<action name="deleteGrade" class="gradeAction" method="deleteGrade">
+			<result name="success" type="redirectAction">
+				gradeList
+       </result>
+		</action>
+
+		<action name="modifyGrade" class="gradeAction" method="modifyGrade">
+			<result name="success">
+				/GradeModify.jsp
+       </result>
+		</action>
+
+
+		<action name="updateGrade" class="gradeAction" method="updateGrade">
+			<result name="success" type="redirectAction">
+				gradeList
+       </result>
+		</action>
+
+		<!-- 下拉列表 -->
+		<action name="sel" class="gradeAction" method="findTeacher">
+			<result name="success" type="json">
+				<param name="root">list1</param>
+			</result>
+		</action>
+
+
+		<action name="addGrade" class="gradeAction" method="addGrade">
+			<result name="success" type="redirectAction">
+				gradeList
+       </result>
+		</action>
+
+	</package>
+
+	<!-- Yuan Morong -->
+	<package name="student" namespace="/stu" extends="LoginIntercrptor">
+		<action name="s" class="collegeAction" method="findAll">
+			<result name="success" type="json">
+				<param name="root">colleges</param>
+			</result>
+		</action>
+		<action name="q" class="gradeAction" method="findAll">
+			<result name="success" type="json">
+				<param name="root">list</param>
+			</result>
+		</action>
+
+		<action name="m" class="majorAction" method="findAll">
+			<result name="success" type="json">
+				<param name="root">majors</param>
+			</result>
+		</action>
+
+		<action name="findStudent" class="studentAction" method="findpages">
+			<result name="success">
+				/Student.jsp
+       </result>
+		</action>
+		<action name="deletestudent" class="studentAction" method="deleteStudent">
+			<result name="success" type="redirectAction">
+				findStudent
+       </result>
+		</action>
+		<action name="modifystudent" class="studentAction" method="modify">
+			<result name="success">
+				/studentupdate.jsp
+       </result>
+		</action>
+		<action name="updatestudent" class="studentAction" method="update">
+			<result name="success" type="redirectAction">
+				findStudent
+       </result>
+		</action>
+		<action name="addstudent" class="studentAction" method="addstudent">
+			<result name="success" type="redirectAction">
+				findStudent
+       </result>
+		</action>
+		<action name="findScore" class="scoreAction" method="findpages">
+			<result name="success">
+				/score.jsp
+       </result>
+		</action>
+		<action name="deleteScore" class="scoreAction" method="delete">
+			<result name="success" type="redirectAction">
+				findScore
+       </result>
+		</action>
+		<action name="addscore" class="scoreAction" method="addScore">
+			<result name="success" type="redirectAction">
+				findScore
+       </result>
+		</action>
+		<action name="updatescore" class="scoreAction" method="update">
+			<result name="success" type="redirectAction">
+				findScore
+       </result>
+		</action>
+		<action name="modifyscore" class="scoreAction" method="modify">
+			<result name="success">
+				/scoreupdate.jsp
+       </result>
+		</action>
+		<action name="sel" class="courseAction" method="SelCourse">
+			<result name="success" type="json">
+				<param name="root">list</param>
+			</result>
+		</action>
+		<action name="selectbook" class="studentAction" method="selectbook">
+			<result>/scoreadd.jsp</result>
+		</action>
+	</package>
+
+	
+
+
+	<!-- Luo Rentai -->
+
+	<package name="Role" namespace="/role" extends="LoginIntercrptor">
+		<action name="loadRole" class="roleAction" method="addOption">
+			<result name="success" type="">/RoleAdd.jsp</result>
+		</action>
+		<action name="saveRole" class="roleAction" method="addRole">
+			<result name="success" type="redirectAction">queryRole</result>
+		</action>
+		<action name="deleteRole" class="roleAction" method="deleteRole">
+			<result name="success" type="redirectAction">queryRole</result>
+		</action>
+		
+		<action name="deleteAll" class="loginLogAction" method="deleteAll">
+			<result name="success" type="redirectAction">list</result>
+		</action>
+		
+		<action name="modifyRole" class="roleAction" method="findRoleById">
+			<result name="success" type="">/RoleModify.jsp</result>
+		</action>
+		<action name="updateRole" class="roleAction" method="updateRole">
+			<result name="success" type="redirectAction">queryRole</result>
+		</action>
+		<action name="queryRole" class="roleAction" method="findRecPages">
+			<result name="success">/Role.jsp</result>
+		</action>
+		<action name="list" class="loginLogAction" method="findRecPages">
+				<result name="success">/LoginLog.jsp</result>
+		</action>
+	</package>
+
+	<package name="Login" namespace="/log" extends="struts-default">
+		
+		<action name="hello" class="accountAction" method="loginhello">
+			<result name="success">/login.jsp</result>
+		</action>
+		
+		<action name="login" class="accountAction" method="addlogin">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">login</param>
+			</result>
+			<result name="error" type="redirectAction">hello</result>
+		</action>
+
+		<action name="out" class="accountAction" method="outLogin">
+			<result name="success" type="redirectAction">hello</result>
+		</action>
+		
+	</package>
+
+
+	<package name="index" namespace="/" extends="LoginIntercrptor">
+		<action name="login" class="accountAction" method="loginTrue">
+			<result name="success">/indexs.jsp</result>
+		</action>
+		<action name="main" class="accountAction" method="loginTrue">
+			<result name="success">/main.jsp</result>
+		</action>
+	</package>
+
+</struts>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="com.entity.Grade"   table="t_grade">
+  <id name="id" type="integer" column="id">
+  <generator class="identity"></generator>
+  
+  </id>
+  <property name="name" type="string" column="name"></property>
+
+   <property name="teac_no" type="integer" column="teac_no"></property>
+   <!-- 多对1的关系 -->
+
+<many-to-one name="teacher" column="teac_no" class="com.entity.Teacher"  lazy="false" insert="false" update="false"></many-to-one>
+  </class>
+</hibernate-mapping>

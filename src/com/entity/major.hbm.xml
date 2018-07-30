@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.entity.Major" table="t_major">
+		<id name="id" type="integer" column="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="name" type="string" column="name" />
+		<property name="text" type="string" column="text" />
+		<property name="college_id" type="integer" column="college_id" />
+		<many-to-one name="college" column="college_id" class="com.entity.College" cascade="all" insert="false" update="false" lazy="false"></many-to-one>
+		
+	</class>
+
+</hibernate-mapping>

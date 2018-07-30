@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.entity.Course" table="t_course">
+		<id name="id" type="integer" column="id">
+			<generator class="native" />
+		</id>
+		<property name="name" type="string" column="name" />
+		<property name="text" type="string" column="text" />
+		<property name="major_id" type="integer" column="major_id" />
+		<many-to-one name="major" column="major_id" class="com.entity.Major" lazy="false" insert="false" update="false"></many-to-one>
+	</class>
+</hibernate-mapping>

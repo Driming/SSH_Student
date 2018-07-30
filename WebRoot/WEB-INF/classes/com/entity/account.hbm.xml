@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.entity.Account" table="t_account">
+		<id name="id" type="integer" column="id">
+			<generator class="native" />
+		</id>
+		<property name="account" type="string" column="account" />
+		<property name="pwd" type="string" column="pwd" />
+		<property name="user_no" type="string" column="user_no"/>
+		<property name="role_id" type="integer" column="role_id" />
+		<many-to-one name="role" column="role_id" class="com.entity.Role" lazy="false" insert="false" update="false"/>
+	</class>
+</hibernate-mapping>

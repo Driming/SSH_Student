@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="com.entity.Teacher"   table="t_teacher">
+  <id name="id" type="integer" column="id">
+  <generator class="identity"></generator>
+  </id>
+  <property name="no" type="string" column="no"></property>
+   <property name="name" type="string" column="name"></property>
+   <property name="manager" type="string" column="manager"></property>
+  </class>
+</hibernate-mapping>
